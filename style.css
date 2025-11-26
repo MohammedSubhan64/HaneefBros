@@ -1,0 +1,249 @@
+
+/* ----------------------------------------------------------- 
+   1. CORE VARIABLES & LUXURY ENGINE
+----------------------------------------------------------- */
+:root {
+  /* The "Liquid Gold" Gradient */
+  --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 40%, #b38728 60%, #fbf5b7 100%);
+  --gold-solid: #c5a059;
+  
+  --bg-light: #ffffff;
+  --bg-soft: #f9f9f9;
+  --bg-dark: #0f0f0f;
+  --bg-darker: #050505;
+  
+  --text-light: #111111;
+  --text-dark: #f4f4f4;
+  --text-muted-light: #666;
+  --text-muted-dark: #888;
+
+  --nav-height: 80px;
+  --transition-slow: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Base Reset */
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: var(--transition-slow);
+  overflow-x: hidden;
+}
+
+/* Typography Overrides */
+h1, h2, h3, h4, .font-serif {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Gold Text Effect */
+.text-luxury-gold {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  /* Fallback for old browsers */
+  color: var(--gold-solid); 
+}
+
+/* ----------------------------------------------------------- 
+   2. PRELOADER
+----------------------------------------------------------- */
+#preloader {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: #000; z-index: 9999;
+  display: flex; justify-content: center; align-items: center;
+  transition: opacity 0.8s ease;
+}
+.loader-text {
+  font-family: 'Cormorant Garamond', serif;
+  color: #fff; font-size: 2rem; letter-spacing: 5px;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+
+/* ----------------------------------------------------------- 
+   3. DARK MODE SYSTEM
+----------------------------------------------------------- */
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+body.dark-mode .bg-soft { background-color: var(--bg-darker); }
+body.dark-mode .navbar-brand { color: #fff !important; }
+body.dark-mode .text-muted { color: var(--text-muted-dark) !important; }
+body.dark-mode .card { background-color: #1a1a1a; border-color: #333; }
+body.dark-mode .modal-content { background-color: #1a1a1a; color: #fff; }
+body.dark-mode .form-control { background-color: #222; border-color: #444; color: #fff; }
+body.dark-mode .btn-close { filter: invert(1); }
+
+/* ----------------------------------------------------------- 
+   4. NAVIGATION (Glass & Scroll)
+----------------------------------------------------------- */
+.navbar {
+  height: var(--nav-height);
+  transition: var(--transition-slow);
+  background: transparent;
+  padding: 0;
+}
+
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+}
+body.dark-mode .navbar.scrolled {
+  background: rgba(15, 15, 15, 0.9);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.nav-link {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: inherit !important;
+  position: relative;
+  padding: 10px 0;
+  margin: 0 15px;
+}
+.nav-link::before {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+  background: var(--gold-solid); transition: 0.4s ease;
+}
+.nav-link:hover::before { width: 100%; }
+
+.btn-concierge {
+  border: 1px solid currentColor;
+  padding: 10px 25px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: 0.4s;
+  border-radius: 0;
+}
+.btn-concierge:hover {
+  background: var(--gold-solid);
+  border-color: var(--gold-solid);
+  color: #fff !important;
+}
+
+/* ----------------------------------------------------------- 
+   5. HERO SECTION (Cinematic)
+----------------------------------------------------------- */
+.hero-wrapper {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.hero-slide {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.hero-slide::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+}
+.hero-content {
+  position: absolute; bottom: 15%; left: 10%; z-index: 2; color: #fff;
+  max-width: 600px;
+}
+.hero-subtitle {
+  font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1rem;
+  display: block; color: #fcf6ba;
+}
+.hero-title {
+  font-size: 4.5rem; line-height: 1; margin-bottom: 1.5rem;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+@media (max-width: 768px) { .hero-title { font-size: 3rem; } }
+
+/* ----------------------------------------------------------- 
+   6. EDITORIAL SECTIONS
+----------------------------------------------------------- */
+.section-padding { padding: 100px 0; }
+
+.about-img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.about-img {
+  width: 100%; height: auto;
+  transition: transform 1.5s ease;
+}
+.about-img-wrapper:hover .about-img { transform: scale(1.05); }
+
+/* Parallax Stats */
+.stats-section {
+  background-image: url('img/textile.jpg'); /* Ensure this path is correct or use placeholder */
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative;
+  padding: 120px 0;
+  color: #fff;
+}
+.stats-overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.7);
+}
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem; color: var(--gold-solid);
+}
+
+/* Collection Cards (Lookbook Style) */
+.lookbook-card {
+  position: relative;
+  margin-bottom: 30px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.lookbook-img {
+  width: 100%; height: 500px; object-fit: cover;
+  transition: transform 0.8s ease;
+}
+.lookbook-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.2);
+  transition: 0.4s;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+}
+.lookbook-card:hover .lookbook-img { transform: scale(1.1); }
+.lookbook-card:hover .lookbook-overlay { opacity: 1; background: rgba(0,0,0,0.5); }
+.lookbook-title {
+  color: #fff; border: 1px solid #fff; padding: 15px 30px;
+  text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;
+}
+/* Trigger Hover */
+.collection-trigger { cursor: pointer; transition: color 0.3s; }
+.collection-trigger:hover { color: var(--gold-solid); }
+
+/* ----------------------------------------------------------- 
+   7. LOCATIONS (Minimalist)
+----------------------------------------------------------- */
+.location-row {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 30px 0;
+  transition: 0.3s;
+}
+body.dark-mode .location-row { border-bottom: 1px solid rgba(255,255,255,0.1); }
+.location-row:hover { background: rgba(0,0,0,0.02); padding-left: 20px; }
+body.dark-mode .location-row:hover { background: rgba(255,255,255,0.02); }
+
+/* ----------------------------------------------------------- 
+   8. FOOTER
+----------------------------------------------------------- */
+footer {
+  background-color: #080808;
+  color: #888;
+  font-size: 0.85rem;
+}
+footer h5 { color: #fff; letter-spacing: 1px; margin-bottom: 1.5rem; }
+footer a { color: #888; text-decoration: none; transition: 0.3s; }
+footer a:hover { color: var(--gold-solid); }
+
+.theme-toggle { cursor: pointer; transition: 0.3s; }
+.theme-toggle:hover { color: var(--gold-solid); }
